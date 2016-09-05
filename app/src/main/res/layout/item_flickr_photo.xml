@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="flickrImage"
+            type="com.flickrtest.data.flickr.FlickrImage"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.flickrtest.commons.widget.SquareImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:glide_flickr_photo="@{flickrImage}"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_alignParentBottom="true"
+            android:background="#80000000"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{flickrImage.title}"
+            android:textColor="#FFFFFF"
+            />
+    </RelativeLayout>
+
+</layout>

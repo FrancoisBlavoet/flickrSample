@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.flickrtest"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    buildTypes {
+
+        def STRING = 'String'
+        def API_KEY = 'API_KEY'
+
+        debug {
+            buildConfigField STRING, API_KEY, '"3e7cc266ae2b0e0d78e279ce8e361736"'
+        }
+
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+    compile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.espressoVersion"
+
+    // Support Lib
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    compile "com.android.support:palette-v7:$rootProject.supportLibraryVersion"
+
+    compile "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+
+    // Dagger
+    apt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile "com.google.dagger:dagger:$rootProject.daggerVersion"
+
+    compile "com.google.guava:guava:$rootProject.guavaVersion"
+    compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+
+    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+
+}
